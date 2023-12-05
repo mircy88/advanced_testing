@@ -1,6 +1,7 @@
 package ro.sda.advanced_testing.controllers;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.sda.advanced_testing.entities.User;
@@ -12,11 +13,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+    @Autowired
     private UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+//    public UserController(UserService userService) {
+//        this.userService = userService;
+//    }
 
     @GetMapping("/")// aceasta metoda se va apela cand vom avea un request de tipul Get.
     public ResponseEntity<List<User>> getAllUsers(){
