@@ -5,6 +5,7 @@ import ro.sda.advanced_testing.entities.User;
 import ro.sda.advanced_testing.repositories.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -16,6 +17,9 @@ public class UserService {
 
     public List<User> findAll(){
         return userRepository.findAll(); // ne returneaza o lista cu toate registrarile din tabela user(echivalentul lui SELECT*FROM TBL_USERS).
+    }
+    public Optional<User> findById(Integer id){
+        return userRepository.findById(id);
     }
     public User createUser(User user){
         return userRepository.save(user); // metoda "save" ne adauga in baza de date un obiect de tipul user.
