@@ -41,10 +41,10 @@ public class UserControllerTest {
 
         mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsString(user)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.email").value("mircea@gmail.com"))
-                .andExpect(jsonPath("$.username").value("mircea"))
-                .andExpect(jsonPath("$.id").value("1"))
-                .andExpect(jsonPath("$.password").value("1234"));
+                .andExpect(jsonPath("$.data.email").value("mircea@gmail.com"))
+                .andExpect(jsonPath("$.data.username").value("mircea"))
+                .andExpect(jsonPath("$.data.id").value("1"))
+                .andExpect(jsonPath("$.data.password").value("1234"));
     }
     @Test
     public void getAllUsersTest()throws Exception{
@@ -66,14 +66,14 @@ public class UserControllerTest {
         Mockito.when(userService.findAll()).thenReturn(userList);
         mockMvc.perform(get("/users/"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", IsCollectionWithSize.hasSize(2)))
-                .andExpect(jsonPath("$[0].username").value("user1"))
-                .andExpect(jsonPath("$[0].email").value("user1@gmail.com"))
-                .andExpect(jsonPath("$[0].password").value("1234"))
-                .andExpect(jsonPath("$[0].id").value("1"))
-                .andExpect(jsonPath("$[1].username").value("user2"))
-                .andExpect(jsonPath("$[1].email").value("user2@gmail.com"))
-                .andExpect(jsonPath("$[1].password").value("1234"))
-                .andExpect(jsonPath("$[1].id").value("2"));
+                .andExpect(jsonPath("$.data", IsCollectionWithSize.hasSize(2)))
+                .andExpect(jsonPath("$.data[0].username").value("user1"))
+                .andExpect(jsonPath("$.data[0].email").value("user1@gmail.com"))
+                .andExpect(jsonPath("$.data[0].password").value("1234"))
+                .andExpect(jsonPath("$.data[0].id").value("1"))
+                .andExpect(jsonPath("$.data[1].username").value("user2"))
+                .andExpect(jsonPath("$.data[1].email").value("user2@gmail.com"))
+                .andExpect(jsonPath("$.data[1].password").value("1234"))
+                .andExpect(jsonPath("$.data[1].id").value("2"));
     }
 }
